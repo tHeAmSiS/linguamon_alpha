@@ -535,9 +535,9 @@ async function renderSummary(packId, mode, correct, total){
 }
 
 function bossConfigForPack(packId){
-  if(packId==='salve') return {hp:40};
-  if(packId==='l1') return {hp:50};
-  return {hp:60};
+  if(packId==='salve') return {hp:25};
+  if(packId==='l1') return {hp:30};
+  return {hp:35};
 }
 
 function pickBossTaskPool(packId){
