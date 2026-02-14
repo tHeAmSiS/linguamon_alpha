@@ -1,0 +1,420 @@
+{
+  "version": "0.1.0-alpha",
+  "packs": [
+    {
+      "id": "salve",
+      "phase": "lehrbuch",
+      "title": "Salve",
+      "subtitle": "Einstieg",
+      "order": 0
+    },
+    {
+      "id": "l1",
+      "phase": "lehrbuch",
+      "title": "Lektion 1",
+      "subtitle": "Pontes 1",
+      "order": 1
+    },
+    {
+      "id": "l2",
+      "phase": "lehrbuch",
+      "title": "Lektion 2",
+      "subtitle": "Pontes 1",
+      "order": 2
+    }
+  ],
+  "tasks": [
+    {
+      "id": "salve_sc_1",
+      "pack_id": "salve",
+      "type": "single_choice",
+      "prompt": "Welche Wortart ist <b>Aulus</b> in: <i>Aulus ludit.</i>?",
+      "options": [
+        "Verb",
+        "Substantiv (Subjekt)",
+        "Adjektiv",
+        "Konjunktion"
+      ],
+      "correct_indices": [
+        1
+      ],
+      "difficulty": "leicht",
+      "tags": [
+        "Satzglieder",
+        "Wortarten"
+      ],
+      "is_heavy": false
+    },
+    {
+      "id": "salve_ty_1",
+      "pack_id": "salve",
+      "type": "typing",
+      "prompt": "Analysiere die Form <b>familiam</b>: (Format: Kasus Numerus Genus, z.B. Akk Sg f)",
+      "answer": [
+        "Akk Sg f"
+      ],
+      "difficulty": "mittel",
+      "tags": [
+        "Nomen",
+        "Analyse"
+      ],
+      "is_heavy": false
+    },
+    {
+      "id": "salve_bf_1",
+      "pack_id": "salve",
+      "type": "build_form",
+      "prompt": "Bilde: <b>Akk. Pl.</b> von <b>dominus</b>",
+      "answer_full": "dominos",
+      "difficulty": "schwer",
+      "tags": [
+        "o-Dekl",
+        "Akkusativ",
+        "Plural"
+      ],
+      "is_heavy": true
+    },
+    {
+      "id": "salve_dd_1",
+      "pack_id": "salve",
+      "type": "drag_drop",
+      "prompt": "Ordne zu: Welche Endung passt zu welchem Kasus? (o-Dekl. Sg.)",
+      "items": [
+        "-us",
+        "-um"
+      ],
+      "targets": [
+        "Nom. Sg.",
+        "Akk. Sg."
+      ],
+      "mapping": {
+        "-us": "Nom. Sg.",
+        "-um": "Akk. Sg."
+      },
+      "difficulty": "mittel",
+      "tags": [
+        "o-Dekl",
+        "Endungen"
+      ],
+      "is_heavy": false
+    },
+    {
+      "id": "l1_ty_1",
+      "pack_id": "l1",
+      "type": "typing",
+      "prompt": "Analysiere <b>puellam</b>:",
+      "answer": [
+        "Akk Sg f"
+      ],
+      "difficulty": "mittel",
+      "tags": [
+        "a-Dekl",
+        "Analyse"
+      ],
+      "is_heavy": false
+    },
+    {
+      "id": "l1_bf_1",
+      "pack_id": "l1",
+      "type": "build_form",
+      "prompt": "Bilde: <b>Nom. Pl.</b> von <b>puella</b>",
+      "answer_full": "puellae",
+      "difficulty": "schwer",
+      "tags": [
+        "a-Dekl",
+        "Plural"
+      ],
+      "is_heavy": false
+    },
+    {
+      "id": "l1_sc_1",
+      "pack_id": "l1",
+      "type": "single_choice",
+      "prompt": "Welche Aussage stimmt?",
+      "options": [
+        "Die 3. Person Singular endet im Präsens immer auf -nt.",
+        "Die 3. Person Singular endet im Präsens oft auf -t.",
+        "Der Infinitiv endet im Lateinischen immer auf -nt.",
+        "Neutra haben im Plural immer -i."
+      ],
+      "correct_indices": [
+        1
+      ],
+      "difficulty": "leicht",
+      "tags": [
+        "Verb",
+        "Präsens"
+      ],
+      "is_heavy": false
+    },
+    {
+      "id": "l1_bf_2",
+      "pack_id": "l1",
+      "type": "build_form",
+      "prompt": "Bilde: <b>3. Pers. Pl.</b> von <b>laudat</b>",
+      "answer_full": "laudant",
+      "difficulty": "schwer",
+      "tags": [
+        "Verb",
+        "3. Pers Pl"
+      ],
+      "is_heavy": false
+    },
+    {
+      "id": "l1_dd_1",
+      "pack_id": "l1",
+      "type": "drag_drop",
+      "prompt": "Ordne die Formen dem Merkmal zu:",
+      "items": [
+        "amat",
+        "amant",
+        "amare"
+      ],
+      "targets": [
+        "3. Pers. Sg.",
+        "3. Pers. Pl.",
+        "Infinitiv"
+      ],
+      "mapping": {
+        "amat": "3. Pers. Sg.",
+        "amant": "3. Pers. Pl.",
+        "amare": "Infinitiv"
+      },
+      "difficulty": "mittel",
+      "tags": [
+        "Verbformen"
+      ],
+      "is_heavy": false
+    },
+    {
+      "id": "l2_ty_1",
+      "pack_id": "l2",
+      "type": "typing",
+      "prompt": "Analysiere <b>domini</b>: (Format wie: Nom Pl m)",
+      "answer": [
+        "Nom Pl m"
+      ],
+      "difficulty": "mittel",
+      "tags": [
+        "o-Dekl",
+        "Analyse"
+      ],
+      "is_heavy": false
+    },
+    {
+      "id": "l2_bf_1",
+      "pack_id": "l2",
+      "type": "build_form",
+      "prompt": "Bilde: <b>Gen. Sg.</b> von <b>puella</b>",
+      "answer_full": "puellae",
+      "difficulty": "schwer",
+      "tags": [
+        "a-Dekl",
+        "Genitiv"
+      ],
+      "is_heavy": false
+    },
+    {
+      "id": "l2_sc_1",
+      "pack_id": "l2",
+      "type": "single_choice",
+      "prompt": "Neutrumregel: Welche Aussage stimmt?",
+      "options": [
+        "Nom. und Akk. sind bei Neutra im Sg. verschieden.",
+        "Nom. und Akk. sind bei Neutra gleich (Sg. und Pl.).",
+        "Neutra haben immer -us im Nom. Sg.",
+        "Neutra haben nie -a im Plural."
+      ],
+      "correct_indices": [
+        1
+      ],
+      "difficulty": "leicht",
+      "tags": [
+        "Neutrumregel"
+      ],
+      "is_heavy": false
+    },
+    {
+      "id": "l2_bf_2",
+      "pack_id": "l2",
+      "type": "build_form",
+      "prompt": "Bilde: <b>Nom./Akk. Pl.</b> von <b>bellum</b>",
+      "answer_full": "bella",
+      "difficulty": "schwer",
+      "tags": [
+        "Neutrum",
+        "Plural"
+      ],
+      "is_heavy": true
+    },
+    {
+      "id": "l2_ty_2",
+      "pack_id": "l2",
+      "type": "typing",
+      "prompt": "Analysiere <b>bella</b>:",
+      "answer": [
+        "Nom Pl n"
+      ],
+      "difficulty": "mittel",
+      "tags": [
+        "Neutrum",
+        "Analyse"
+      ],
+      "is_heavy": false
+    },
+    {
+      "id": "l2_bf_3",
+      "pack_id": "l2",
+      "type": "build_form",
+      "prompt": "Bilde den <b>Vokativ Sg.</b> von <b>servus</b>",
+      "answer_full": "serve",
+      "difficulty": "schwer",
+      "tags": [
+        "Vokativ"
+      ],
+      "is_heavy": true
+    }
+  ],
+  "vocab": {
+    "salve": [
+      {
+        "la": "salve",
+        "de": "sei gegrüßt",
+        "pos": "Interj"
+      },
+      {
+        "la": "aqua",
+        "de": "Wasser",
+        "pos": "Nomen",
+        "gen": "aquae",
+        "gender": "f"
+      },
+      {
+        "la": "dominus",
+        "de": "Herr",
+        "pos": "Nomen",
+        "gen": "domini",
+        "gender": "m"
+      }
+    ],
+    "l1": [
+      {
+        "la": "puella",
+        "de": "Mädchen",
+        "pos": "Nomen",
+        "gen": "puellae",
+        "gender": "f"
+      },
+      {
+        "la": "laudare",
+        "de": "loben",
+        "pos": "Verb",
+        "pp": "laudo, laudare, laudavi, laudatum"
+      },
+      {
+        "la": "familia",
+        "de": "Familie, Hausgemeinschaft",
+        "pos": "Nomen",
+        "gen": "familiae",
+        "gender": "f"
+      }
+    ],
+    "l2": [
+      {
+        "la": "bellum",
+        "de": "Krieg",
+        "pos": "Nomen",
+        "gen": "belli",
+        "gender": "n"
+      },
+      {
+        "la": "servus",
+        "de": "Sklave, Diener",
+        "pos": "Nomen",
+        "gen": "servi",
+        "gender": "m"
+      },
+      {
+        "la": "amicus",
+        "de": "Freund",
+        "pos": "Nomen",
+        "gen": "amici",
+        "gender": "m"
+      }
+    ]
+  },
+  "monsters": [
+    {
+      "id": "asteron",
+      "name": "Asteron",
+      "line": "Asteron",
+      "stage": 1,
+      "sprite": "assets/monsters/asteron_base.png",
+      "lore": "Ein neugieriges Linguamon, das Endungen wittert wie Sternenstaub."
+    },
+    {
+      "id": "asteron_wulf",
+      "name": "Asteron Wulf",
+      "line": "Asteron",
+      "stage": 2,
+      "sprite": "assets/monsters/asteron_evo1.png",
+      "lore": "Schneller, schärfer, sicherer: Es jagt Fehler im Akkusativ."
+    },
+    {
+      "id": "asteron_hart",
+      "name": "Asteron Hart",
+      "line": "Asteron",
+      "stage": 3,
+      "sprite": "assets/monsters/asteron_evo2.png",
+      "lore": "Sein Geweih trägt Regeln wie Runen. Kritische Treffer liebt es."
+    },
+    {
+      "id": "vocaryn",
+      "name": "Vocaryn",
+      "line": "Vocaryn",
+      "stage": 1,
+      "sprite": "assets/monsters/vocaryn_base.png",
+      "lore": "Hüpft durch Silben und sammelt Vokabeln wie Seerosen."
+    },
+    {
+      "id": "vocaryn_shell",
+      "name": "Vocaryn Shell",
+      "line": "Vocaryn",
+      "stage": 2,
+      "sprite": "assets/monsters/vocaryn_evo1.png",
+      "lore": "Geduldig und zäh: Es schützt dich, wenn du erst warm werden musst."
+    },
+    {
+      "id": "vocaryn_coil",
+      "name": "Vocaryn Coil",
+      "line": "Vocaryn",
+      "stage": 3,
+      "sprite": "assets/monsters/vocaryn_evo2.png",
+      "lore": "Schlingt Endungen zu perfekten Formen. Ein Meister des Mischmodus."
+    },
+    {
+      "id": "declara",
+      "name": "Declara",
+      "line": "Declara",
+      "stage": 1,
+      "sprite": "assets/monsters/declara_base.png",
+      "lore": "Miauend deutet es Satzglieder – als würde es sie vorlesen."
+    },
+    {
+      "id": "declara_noct",
+      "name": "Declara Noct",
+      "line": "Declara",
+      "stage": 2,
+      "sprite": "assets/monsters/declara_evo1.png",
+      "lore": "Im Schatten der Fehler schlägt es flatternd zurück – aber fair."
+    },
+    {
+      "id": "declara_owl",
+      "name": "Declara Owl",
+      "line": "Declara",
+      "stage": 3,
+      "sprite": "assets/monsters/declara_evo2.png",
+      "lore": "Sieht jede Endung auf den ersten Blick. Wer sie hat, liest Formen wie Karten."
+    }
+  ]
+}

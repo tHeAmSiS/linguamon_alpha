@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Linguamon (Alpha)</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="assets/icon.png">
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <img src="assets/icon.png" alt="" class="logo"/>
+      <div>
+        <div class="title">Linguamon</div>
+        <div class="subtitle">Alpha · Salve / Lektion 1 / Lektion 2</div>
+      </div>
+    </div>
+    <div class="actions">
+      <button id="btnFullscreen" class="btn ghost">Fullscreen</button>
+      <button id="btnExport" class="btn ghost">Export</button>
+      <button id="btnImport" class="btn ghost">Import</button>
+      <button id="btnAdmin" class="btn">Admin</button>
+    </div>
+  </header>
+
+  <main id="app" class="app">
+    <!-- views injected -->
+  </main>
+
+  <dialog id="dlgImport" class="dialog">
+    <form method="dialog" class="dialogBody">
+      <h3>Import</h3>
+      <p>Wähle eine JSON-Datei, die du zuvor exportiert hast.</p>
+      <input id="importFile" type="file" accept="application/json"/>
+      <div class="row end">
+        <button class="btn ghost" value="cancel">Abbrechen</button>
+        <button id="btnDoImport" class="btn" value="ok">Importieren</button>
+      </div>
+      <p class="hint small">Tipp: Das überschreibt deinen aktuellen Spielstand auf diesem Gerät.</p>
+    </form>
+  </dialog>
+
+  <dialog id="dlgAdminLock" class="dialog">
+    <form method="dialog" class="dialogBody">
+      <h3>Admin</h3>
+      <p>Geheime URL: <code class="inline">/#/admin</code></p>
+      <p class="small">Für die Alpha ist der Adminbereich über eine versteckte Route erreichbar.</p>
+      <div class="row end">
+        <button class="btn" value="ok">OK</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
