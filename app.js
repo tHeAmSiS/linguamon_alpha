@@ -1385,7 +1385,7 @@ $('#btnAdmin').addEventListener('click', ()=>{
 (async ()=>{
   // register service worker (best-effort)
   if('serviceWorker' in navigator){
-    try{ await navigator.serviceWorker.register('sw.js?v=2'); }catch(e){}
+    try{ await navigator.serviceWorker.register('sw.js?v=3'); }catch(e){}
   }
   await loadContent();
   // local override for teacher device
