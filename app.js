@@ -158,6 +158,13 @@ async function saveProfile(){
 
 // ---------- Router / Views ----------
 const appEl = $('#app');
+document.addEventListener('click', (e) => {
+  const el = e.target.closest('[data-go]');
+  if (!el) return;
+  e.preventDefault();
+  const to = el.getAttribute('data-go');
+  nav(to);
+});
 window.addEventListener('hashchange', render);
 
 function route(){
