@@ -1,4 +1,4 @@
-const CACHE='linguamon-alpha-v1';
+const CACHE='linguamon-alpha-v2';
 const ASSETS=[
   './','./index.html','./style.css','./app.js','./manifest.json',
   './content/content.json','./content/version.json',
