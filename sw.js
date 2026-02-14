@@ -1,6 +1,7 @@
-const CACHE='linguamon-alpha-v3';
+const CACHE='linguamon-alpha-v4';
 const ASSETS=[
   './','./index.html','./style.css','./app.js','./manifest.json',
+  './vendor/jszip.min.js',
   './content/content.json','./content/version.json',
   './assets/icon.png',
   './assets/monsters/asteron_base.png','./assets/monsters/asteron_evo1.png','./assets/monsters/asteron_evo2.png',
