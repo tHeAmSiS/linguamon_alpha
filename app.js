@@ -137,55 +137,6 @@ async function getMonsterSpriteUrl(monId, defaultUrl){
   return defaultUrl;
 }
 
-// ---------- Battle helpers ----------
-function monsterById(monId){
-  return CONTENT?.monsters?.find(m=>m.id===monId) || null;
-}
-function getPlayerMonsterId(){
-  if(!CONTENT || !PROFILE?.starterLine) return null;
-  const lineMons = CONTENT.monsters
-    .filter(m=>m.line===PROFILE.starterLine)
-    .sort((a,b)=>a.stage-b.stage);
-  if(!lineMons.length) return null;
-  let chosen = lineMons[0];
-  for(const m of lineMons){
-    if(PROFILE.unlockedMonsters?.[m.id]) chosen = m;
-  }
-  return chosen.id;
-}
-function getBossMonsterId(packId){
-  // fixed per pack for recognition (can be changed in content later)
-  if(packId==='salve') return 'vocaryn_evo1';
-  if(packId==='l1') return 'declara_evo1';
-  if(packId==='l2') return 'asteron_evo2';
-  return 'asteron_evo1';
-}
-async function setBattleSprites({playerImgId, enemyImgId, packId, enemyMonId=null, playerMonId=null, enemyFilter='', playerFilter='' }){
-  try{
-    const pId = playerMonId || getPlayerMonsterId();
-    const eId = enemyMonId || getBossMonsterId(packId);
-
-    const pMon = monsterById(pId);
-    const eMon = monsterById(eId);
-
-    const pImg = document.getElementById(playerImgId);
-    const eImg = document.getElementById(enemyImgId);
-
-    if(pImg && pMon){
-      pImg.src = await getMonsterSpriteUrl(pMon.id, pMon.sprite);
-      const entry = PROFILE?.unlockedMonsters?.[pMon.id];
-      const autoFilter = (entry && typeof entry.color==='number') ? (COLOR_FILTERS[entry.color] || '') : '';
-      pImg.style.filter = playerFilter || autoFilter || '';
-    }
-    if(eImg && eMon){
-      eImg.src = await getMonsterSpriteUrl(eMon.id, eMon.sprite);
-      eImg.style.filter = enemyFilter;
-    }
-  }catch(_e){
-    // non-fatal
-  }
-}
-
 // ---------- Loading ----------
 async function loadContent(){
   const res = await fetch(CONTENT_URL, {cache:'no-store'});
@@ -407,16 +358,6 @@ async function renderSession(packId, mode){
         <div class="sep"></div>
         <div class="progress"><div style="width:${prog}%"></div></div>
         <div class="sep"></div>
-        <div class="battle">
-          <div class="enemy">
-            <div class="battleSmall">Gegner</div>
-            <div class="spriteWrap"><img id="enemySprite" alt=""></div>
-          </div>
-          <div class="player">
-            <div class="battleSmall">Dein Linguamon</div>
-            <div class="spriteWrap"><img id="playerSprite" alt=""></div>
-          </div>
-        </div>
         <div class="quizPrompt">${t.prompt}</div>
         <div id="taskArea"></div>
         <div class="sep"></div>
@@ -439,7 +380,6 @@ async function renderSession(packId, mode){
       hb.style.display = 'block';
       hb.innerHTML = hintFor(t);
     };
-    setBattleSprites({playerImgId:'playerSprite', enemyImgId:'enemySprite', packId});
     renderTask(t);
   }
 
@@ -470,7 +410,7 @@ async function renderSession(packId, mode){
         <div class="stack">
           <input class="text" id="ans" placeholder="Antwort eingeben …"/>
           <div class="row end">
-            <button class="btn" id="btnOk">OK</button>
+            <button type="button" class="btn" id="btnOk">OK</button>
           </div>
           <div class="small muted">Groß-/Kleinschreibung egal. Keine Makrons nötig.</div>
         </div>
@@ -500,7 +440,7 @@ async function renderSession(packId, mode){
               <option value="">– wählen –</option>${opts}
             </select></label>`;
           }).join('')}
-          <div class="row end"><button class="btn" id="btnCheck">Prüfen</button></div>
+          <div class="row end"><button type="button" class="btn" id="btnCheck">Prüfen</button></div>
         </div>
       `;
       $('#btnCheck').onclick = async ()=>{
@@ -530,7 +470,6 @@ async function renderSession(packId, mode){
     }
     let xp = baseXpFor(t);
     // streak bonus
-    lastEffectEnemy=''; lastEffectPlayer='';
     if(ok){
       streak += 1;
       if(streak >= 3) xp += clamp((streak-2)*2, 0, 10);
@@ -655,8 +594,6 @@ async function renderBossSolo(packId){
   let current = drawTask();
   let correct = 0;
   let wrong = 0;
-  let lastEffectEnemy = '';
-  let lastEffectPlayer = '';
 
   function render(){
     const pct = Math.round((bossHp/bossMax)*100);
@@ -668,22 +605,6 @@ async function renderBossSolo(packId){
             <div class="small muted">Mischmodus · alle Aufgabentypen</div>
           </div>
           <div class="badge" id="bossTimer">${fmtTime(timeLeft)}</div>
-        </div>
-        <div class="sep"></div>
-        <div class="battle">
-          <div class="enemy">
-            <div class="battleSmall">Boss</div>
-            <div class="spriteWrap" id="bossSpriteWrap"><img id="bossSprite" alt=""></div>
-            <div class="hpLine">
-              <span class="battleSmall">HP</span>
-              <div class="hpMini"><div id="bossHpBar" style="width:${pct}%"></div></div>
-            </div>
-          </div>
-          <div class="player">
-            <div class="battleSmall">Du</div>
-            <div class="spriteWrap" id="playerSpriteWrap"><img id="playerBossSprite" alt=""></div>
-            <div class="battleSmall">${PROFILE.starterLine || 'Linguamon'}</div>
-          </div>
         </div>
         <div class="sep"></div>
         <div class="row" style="justify-content:space-between;">
@@ -713,14 +634,6 @@ async function renderBossSolo(packId){
       </div>
     `;
     $('#btnQuit').onclick = ()=>nav('');
-    // sprites
-    const enemyFx = (lastEffectEnemy||'');
-    const playerFx = (lastEffectPlayer||'');
-    const bw = document.getElementById('bossSpriteWrap');
-    const pw = document.getElementById('playerSpriteWrap');
-    if(bw && enemyFx) bw.classList.add(enemyFx);
-    if(pw && playerFx) pw.classList.add(playerFx);
-    setBattleSprites({playerImgId:'playerBossSprite', enemyImgId:'bossSprite', packId});
     renderBossTask(current);
   }
 
@@ -741,7 +654,7 @@ async function renderBossSolo(packId){
         <div class="stack">
           <input class="text" id="ans" placeholder="Antwort eingeben …"/>
           <div class="row end">
-            <button class="btn" id="btnOk">OK</button>
+            <button type="button" class="btn" id="btnOk">OK</button>
           </div>
         </div>
       `;
@@ -766,7 +679,7 @@ async function renderBossSolo(packId){
               <option value="">– wählen –</option>${opts}
             </select></label>`;
           }).join('')}
-          <div class="row end"><button class="btn" id="btnCheck">Prüfen</button></div>
+          <div class="row end"><button type="button" class="btn" id="btnCheck">Prüfen</button></div>
         </div>
       `;
       $('#btnCheck').onclick = async ()=>{
@@ -797,16 +710,12 @@ async function renderBossSolo(packId){
       // quote gate
       if(correct <= QUOTE){
         warmHits += 1;
-        lastEffectPlayer='pulse';
       } else {
         const dmg = t._bossHeavy ? CRIT_DAMAGE : 1;
         bossHp = Math.max(0, bossHp - dmg);
-        lastEffectEnemy='shake';
       }
     } else {
       wrong += 1;
-      lastEffectPlayer='shake';
-      lastEffectEnemy='pulse';
       if(healsUsed < HEAL_CAP){
         bossHp = Math.min(bossMax, bossHp + HEAL_PER_WRONG);
         healsUsed += 1;
@@ -1027,7 +936,7 @@ async function renderClassBossHost(){
             <label class="small muted">Token eingeben (6 Ziffern)</label>
             <input class="text" id="token" inputmode="numeric" placeholder="123456">
           </div>
-          <button class="btn" id="btnSubmit">Einlösen</button>
+          <button type="button" class="btn" id="btnSubmit">Einlösen</button>
           <button class="btn ghost" id="btnReset">Tokens löschen</button>
           <button class="btn ghost" data-go="classboss">Zurück</button>
         </div>
@@ -1104,7 +1013,7 @@ async function renderClassBossJoin(){
       <input class="text" id="code" placeholder="z.B. ${last||'AB12CD'}" value="${last||''}">
       <div class="row end" style="margin-top:12px">
         <button class="btn ghost" data-go="classboss">Abbrechen</button>
-        <button class="btn" id="btnJoin">Start</button>
+        <button type="button" class="btn" id="btnJoin">Start</button>
       </div>
       <p class="hint small" style="margin-top:10px">Hinweis: Der Code dient in der Alpha nur zur Zuordnung – nicht zur technischen Verifikation.</p>
     </div>
@@ -1170,7 +1079,7 @@ async function renderClassBossPlay(sessionCode){
       area.innerHTML = `
         <div class="stack">
           <input class="text" id="ans" placeholder="Antwort eingeben …"/>
-          <div class="row end"><button class="btn" id="btnOk">OK</button></div>
+          <div class="row end"><button type="button" class="btn" id="btnOk">OK</button></div>
         </div>
       `;
       $('#btnOk').onclick = async ()=>{
@@ -1194,7 +1103,7 @@ async function renderClassBossPlay(sessionCode){
               <option value="">– wählen –</option>${opts}
             </select></label>`;
           }).join('')}
-          <div class="row end"><button class="btn" id="btnCheck">Prüfen</button></div>
+          <div class="row end"><button type="button" class="btn" id="btnCheck">Prüfen</button></div>
         </div>
       `;
       $('#btnCheck').onclick = async ()=>{
@@ -1477,7 +1386,7 @@ $('#btnAdmin').addEventListener('click', ()=>{
 (async ()=>{
   // register service worker (best-effort)
   if('serviceWorker' in navigator){
-    try{ await navigator.serviceWorker.register('sw.js?v=4'); }catch(e){}
+    try{ await navigator.serviceWorker.register('sw.js?v=6'); }catch(e){}
   }
   await loadContent();
   // local override for teacher device
